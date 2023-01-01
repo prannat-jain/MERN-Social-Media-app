@@ -1,0 +1,4 @@
+#Login implementation:
+first we encrypt the password, then we save it.
+NExt when a user tries to login, provided password is salted again, and match with the saved one.
+If pass is correct we provide them a jsonwebtoken
