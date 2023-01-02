@@ -10,7 +10,7 @@ export const createPost = async (req, res) => {
       userId,
       firstName: user.firstName,
       lastName: user.lastName,
-      locations: user.location,
+      location: user.location,
       description,
       userPicturePath: user.picturePath,
       picturePath,
@@ -74,7 +74,7 @@ export const likePost = async (req, res) => {
     //updated the front end below
     const updatedPost = await Post.findByIdAndUpdate(
       id,
-      { likes: post.like },
+      { likes: post.likes },
       //new object = true
       { new: true }
     );

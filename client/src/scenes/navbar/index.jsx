@@ -39,8 +39,9 @@ const Navbar = () => {
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
-  const dark = theme.palette.background.dark;
+  const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
+  const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;
 
   const fullName = `${user.firstName} ${user.lastName}`;
@@ -49,7 +50,7 @@ const Navbar = () => {
       <FlexBetween gap="1.75rem">
         <Typography
           fontWeight="bold"
-          fontSize="clamp(1rem,2rem,2.25rem)"
+          fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="primary"
           onClick={() => navigate("/home")}
           sx={{
@@ -76,7 +77,7 @@ const Navbar = () => {
         )}
       </FlexBetween>
 
-      {/*DESKTOP NAV8*/}
+      {/*DESKTOP NAV*/}
       {isNonMobileScreens ? (
         <FlexBetween gap="2rem">
           {/*REDUX state for changing theme to light dark below*/}
@@ -84,7 +85,7 @@ const Navbar = () => {
             {theme.palette.mode === "dark" ? (
               <DarkMode sx={{ fontSize: "25px" }} />
             ) : (
-              <LightMode sx={{ color: dark, fontsize: "25px" }} />
+              <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
           <Message sx={{ fontSize: "25px" }} />
@@ -129,7 +130,7 @@ const Navbar = () => {
           position="fixed"
           right="0"
           bottom="0"
-          height="0"
+          height="100%"
           zIndex="10"
           maxWidth="500px"
           minWidth="300px"
@@ -158,7 +159,7 @@ const Navbar = () => {
               {theme.palette.mode === "dark" ? (
                 <DarkMode sx={{ fontSize: "25px" }} />
               ) : (
-                <LightMode sx={{ color: dark, fontsize: "25px" }} />
+                <LightMode sx={{ color: dark, fontSize: "25px" }} />
               )}
             </IconButton>
             <Message sx={{ fontSize: "25px" }} />

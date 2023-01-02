@@ -54,7 +54,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 /*ROUTES WITH FILES AUTHORISATION FOR UPLOAD*/
-app.post("/auth/register", upload.single("picture", register));
+app.post("/auth/register", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 /*ROUTES*/
@@ -70,7 +70,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(PORT, () => console.log(`Server Port : ${PORT}`));
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
     //inserting dummy data
     //ADD THEM ONE AT A TIME!!!

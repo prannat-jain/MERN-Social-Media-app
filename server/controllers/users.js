@@ -32,7 +32,7 @@ export const getUserFriends = async (req, res) => {
 };
 
 /*UPDATE*/
-export const addRemoveFriends = async (req, res) => {
+export const addRemoveFriend = async (req, res) => {
   //this function follows logic similar to facebook friends
 
   try {
