@@ -19,7 +19,6 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
-import { Email } from "@mui/icons-material";
 
 //yup validation schema:
 const registerSchema = yup.object().shape({
@@ -61,7 +60,60 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-  const handleFormSubmit = async (values, onSubmitProps) => {};
+  const register = async (values, onSubmitProps) => {
+    // this allows us to send form info with image
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+    formData.append("picturePath", values.picture.name);
+
+    const savedUserResponse = await fetch(
+      //sending formData to this api call
+      "http://localhost:3001/auth/register",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    //saving user info in a json file
+    const savedUser = await savedUserResponse.json();
+    onSubmitProps.resetForm();
+
+    if (savedUser) {
+      setPageType("login");
+    }
+  };
+
+  const login = async (values, onSubmitProps) => {
+    //get the user response with an api call
+    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    ///put the user response in a json file
+    const loggedIn = await loggedInResponse.json();
+    onSubmitProps.resetForm();
+
+    //is api call is successul and user in authenticated
+    if (loggedIn) {
+      //calling react reducer state
+      dispatch(
+        setLogin({
+          user: loggedIn.user,
+          token: loggedIn.token,
+        })
+      );
+      navigate("/home");
+    }
+  };
+
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    //calling login and register functions as per boolean
+    if (isLogin) await login(values, onSubmitProps);
+    if (isRegister) await register(values, onSubmitProps);
+  };
 
   return (
     <Formik
@@ -80,13 +132,13 @@ const Form = () => {
         handleSubmit,
         setFieldValue,
         resetForm,
-      }) => {
+      }) => (
         <form onSubmit={handleSubmit}>
           <Box
             display="grid"
             gap="30px"
-            //4 columns max, of equal fractions*/
-            gridTemplateColumns="repeat(4, minmax(0,1fr))"
+            //4 columns max, of equal fractions
+            gridTemplateColumns="repeat(4, minmax(0, 1fr))"
             sx={{
               //for mobile, each input will take all 4 cols
               "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -137,7 +189,7 @@ const Form = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.occupation}
-                  name="location"
+                  name="occupation"
                   error={
                     Boolean(touched.occupation) && Boolean(errors.occupation)
                   }
@@ -241,8 +293,9 @@ const Form = () => {
                 : "Already have an account? Login here."}
             </Typography>
           </Box>
-        </form>;
-      }}
+        </form>
+      )}
     </Formik>
   );
 };
+export default Form;
