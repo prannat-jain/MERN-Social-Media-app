@@ -21,6 +21,7 @@ function App() {
           <CssBaseline></CssBaseline>
           <Routes>
             <Route path="/" element={<LoginPage />} />
+            {/*Authorisation is required for visiting home page and login page*/}
             <Route
               path="/home"
               element={isAuth ? <HomePage /> : <Navigate to="/" />}
