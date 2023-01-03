@@ -26,10 +26,12 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
+  //if we open the comments list or not
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
+  //check if the userid exists in the like object map of booleans
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
@@ -37,6 +39,7 @@ const PostWidget = ({
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
+  //function for changing the number of likes
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
       method: "PATCH",
@@ -46,7 +49,9 @@ const PostWidget = ({
       },
       body: JSON.stringify({ userId: loggedInUserId }),
     });
+    //getting all the updated posts
     const updatedPost = await response.json();
+    //dispatching using setPost
     dispatch(setPost({ post: updatedPost }));
   };
 
