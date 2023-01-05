@@ -63,11 +63,14 @@ const MyPostWidget = ({ picturePath }) => {
     }
 
     //sending post info to backend db
-    const response = await fetch(`http://localhost:3001/posts`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    });
+    const response = await fetch(
+      `https://admin-backend-2pot.onrender.com/posts`,
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      }
+    );
 
     //backend returns the list of updated posts
     const posts = await response.json();

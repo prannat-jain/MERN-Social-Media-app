@@ -27,7 +27,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   //adding/removing friend with an api call
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
+      `https://admin-backend-2pot.onrender.com/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {

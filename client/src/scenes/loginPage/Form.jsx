@@ -70,7 +70,7 @@ const Form = () => {
 
     const savedUserResponse = await fetch(
       //sending formData to this api call
-      "http://localhost:3001/auth/register",
+      "https://admin-backend-2pot.onrender.com/auth/register",
       {
         method: "POST",
         body: formData,
@@ -87,11 +87,14 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     //get the user response with an api call
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
+    const loggedInResponse = await fetch(
+      "https://admin-backend-2pot.onrender.com/auth/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }
+    );
     ///put the user response in a json file
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();

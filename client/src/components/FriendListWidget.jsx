@@ -14,7 +14,7 @@ const FriendListWidget = ({ userId }) => {
   const getFriends = async () => {
     //api call for getting friends
     const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
+      `https://admin-backend-2pot.onrender.com/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

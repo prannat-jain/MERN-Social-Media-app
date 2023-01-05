@@ -12,10 +12,13 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   //get ALL posts using an API CALL
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      "https://admin-backend-2pot.onrender.com/posts",
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
   };
@@ -23,7 +26,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   //get only a users' posts
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:3001/posts/${userId}/posts`,
+      `https://admin-backend-2pot.onrender.com/posts/${userId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

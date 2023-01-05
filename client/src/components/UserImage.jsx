@@ -11,7 +11,7 @@ const UserImage = ({ image, size = "60px" }) => {
         height={size}
         alt="user"
         //profile image source
-        src={`http://localhost:3001/assets/${image}`}
+        src={`https://admin-backend-2pot.onrender.com/assets/${image}`}
       />
     </Box>
   );
