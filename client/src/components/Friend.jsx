@@ -49,7 +49,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           onClick={() => {
             navigate(`/profile/${friendId}`);
             //refreshing the page to solve a bug
-            navigate(0);
+            //navigate(0);
           }}
         >
           <Typography
