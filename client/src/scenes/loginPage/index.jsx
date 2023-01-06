@@ -28,6 +28,9 @@ const LoginPage = () => {
         </Typography>
         <Form></Form>
       </Box>
+      <Typography textAlign="right">
+        Apologies...starting server might take 30 seconds.
+      </Typography>
     </Box>
   );
 };
