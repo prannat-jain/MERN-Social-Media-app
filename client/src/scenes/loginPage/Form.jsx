@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import base__URL from "../../base_URL";
 
 //yup validation schema:
 const registerSchema = yup.object().shape({
@@ -70,7 +71,7 @@ const Form = () => {
 
     const savedUserResponse = await fetch(
       //sending formData to this api call
-      "https://admin-backend-2pot.onrender.com/auth/register",
+      `${base__URL}/auth/register`,
       {
         method: "POST",
         body: formData,
@@ -87,17 +88,27 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     //get the user response with an api call
-    const loggedInResponse = await fetch(
-      "https://admin-backend-2pot.onrender.com/auth/login",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      }
-    );
+    const loggedInResponse = await fetch(`${base__URL}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
     ///put the user response in a json file
     const loggedIn = await loggedInResponse.json();
     onSubmitProps.resetForm();
+
+    const passInvalid = {
+      msg: "Invalid Credentials.",
+    };
+    const userInvalid = {
+      msg: "User does not exist.",
+    };
+
+    if (JSON.stringify(passInvalid) === JSON.stringify(loggedIn)) {
+      alert("Invalid Credentials.");
+    } else if (JSON.stringify(userInvalid) === JSON.stringify(loggedIn)) {
+      alert("User does not exist! Please register.");
+    }
 
     //is api call is successul and user in authenticated
     if (loggedIn) {

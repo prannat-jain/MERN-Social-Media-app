@@ -29,6 +29,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
+import base__URL from "../../base_URL";
 
 const MyPostWidget = ({ picturePath }) => {
   //creating states
@@ -63,14 +64,11 @@ const MyPostWidget = ({ picturePath }) => {
     }
 
     //sending post info to backend db
-    const response = await fetch(
-      `https://admin-backend-2pot.onrender.com/posts`,
-      {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      }
-    );
+    const response = await fetch(`${base__URL}/posts`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
 
     //backend returns the list of updated posts
     const posts = await response.json();

@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import base__URL from "../base_URL";
 
 //profile image for each user (a circular image)
 const UserImage = ({ image, size = "60px" }) => {
@@ -11,7 +12,7 @@ const UserImage = ({ image, size = "60px" }) => {
         height={size}
         alt="user"
         //profile image source
-        src={`https://admin-backend-2pot.onrender.com/assets/${image}`}
+        src={`${base__URL}/assets/${image}`}
       />
     </Box>
   );

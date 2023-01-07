@@ -7,6 +7,7 @@ import FriendListWidget from "components/FriendListWidget";
 import MyPostWidget from "scenes/widgets/MyPostWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import UserWidget from "scenes/widgets/UserWidget";
+import base__URL from "../../base_URL";
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -16,13 +17,10 @@ const ProfilePage = () => {
 
   const getUser = async () => {
     //api fetch call
-    const response = await fetch(
-      `https://admin-backend-2pot.onrender.com/users/${userId}`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`${base__URL}/users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     setUser(data);
   };
