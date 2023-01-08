@@ -11,7 +11,7 @@ const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
 
   return (
-    <Box>
+    <Box style={{ backgroundColor: "lightgreen" }}>
       <Navbar />
       <Box
         width="100%"
