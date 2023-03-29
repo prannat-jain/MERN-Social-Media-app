@@ -80,6 +80,7 @@ export const likePost = async (req, res) => {
     );
     //updated the front end
     res.status(200).json(updatedPost);
+    //catch error
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
